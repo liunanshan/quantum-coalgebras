@@ -1,0 +1,158 @@
+\documentclass{llncs}
+\usepackage{graphicx}
+\usepackage[braket, qm]{qcircuit}
+\usepackage{listings}
+\usepackage{amsfonts}
+\usepackage{amssymb,amsmath}
+\usepackage{pgf,tikz}
+\usepackage{comment}
+\usetikzlibrary{automata, positioning}
+\usetikzlibrary{shapes,arrows}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\BC}{B_{\mathbb{C}}}
+\newcommand{\half}{\frac{1}{\sqrt{2}}}
+\begin{document}
+
+\section{Summary}
+Automata theory is widely used to tackle computational problems. Some quantum versions automata are proposed to study quantum computation. Real-time quantum automata (QA) are introduced in \cite{CJ00} by Moore and Crutchfield. Besides, Quantum finite-state and push-down automata (QFA and QPDA) are defined as special cases of real-time quantum automata. It is also showed that the corresponding languages recognized by quantum automata have pleasing properties in analogy to the classical counterpart. The model by Moore and Crutchifield is frequently referred as to ``'Measure-Once' (MO). Another early model is introduced in \cite{AJ97}, which is referred as to ``Measure-Many'' model (MM).
+
+Early quantum automata models have some limitations, that is to say they did not embody the full power provided by quantum physics. Their states are usually vector states in Hilbert spaces, which can only represent the pure states. Density matrices of self-adjoint positive mappings of Hilbert spaces with unit trace can represent the mixed states. The introduction to the Hilbert space formalism of finite-level quantum systems can be found in \cite{M11}. Moreover, a general QFA model, which is able to simulate all known QFA, is proposed in \cite{AA14}.
+
+Coalgebras are widely used to model state-based systems, covering various flavors of computation, like deterministic, non-deterministic, probabilistic etc. There are several coalgebraic methods for quantum computing. A coalgebraic/monadic description of quantum walks is proposed in \cite{B11}, based on the weight functor induced by the complex numbers. A coalgebraic model of state-based systems that occur in quantum computation is proposed in \cite{F12}, based on the category \textbf{Conv} which incorporates both quantum probability via density matrices and the classical probability that is need for the output. Although the coalgebraic model can model computations for both systems in pure states and systems in mixed states, it has some limitations to model complex quantum systems, like quantum circuits with C-NOT gate. Quantum labeled transition system (QLTS) based on quantum branching monad in \cite{H14} can cover these limitations. 
+
+\section{Transformation}
+Here I try to use the QLTS $(X,s,c)$ in \cite{H14} to model the coalgebraic model $$\mathcal{DM}(H)\rightarrow [0,1]^{E}\times \mathcal{DM}(H)^{S}$$ in \cite{F12}.
+
+Given $dim(H)=n$, $E=\{\epsilon_{1},\dots,\epsilon_{e}\}$ and $S=\{U_1,\dots,U_s\}$, I define $X=\{x_0,x_1,\dots,x_s,y_1,\dots,y_e\}$. The pair of functions is defines as follows:
+$$
+\begin{aligned}
+(s(x_0))_{n,n}&=\lambda \rho\in \mathcal{DM}(H_n). \rho\\
+(c(x_i)(x_j))_{n,n}&=\{U_j\}\ \ \ i=0,1,\dots,s\ and\ j=1,\dots,s\\
+(c(x_i)(y_j))_{n,n}(\rho)&=\rho \epsilon_{j}\ \ \ \ \ i=0,1,\dots,s\ and\ j=1,\dots,e\\
+(c(y_i)(\surd))_{n,n}&=\{I_n\}\ \ \ i=1,\dots,e
+\end{aligned}
+$$
+
+\begin{example}[\cite{F12}]
+There is a quantum automaton over the alphabet $A=\{a,b\}$. Take the two-dimensional state space $\C^{2}$ with the standard basis written as $\ket{0}$, $\ket{1}$.The transition matrices are
+$$
+\delta_a=\half\begin{bmatrix}
+1&1 \\
+1&-1
+\end{bmatrix}, 
+\delta_b=\begin{bmatrix}
+0&1\\
+1&0
+\end{bmatrix}.
+$$
+The initial state is $\varphi_0=\ket{0}$ and the effect is $\epsilon=\bra{0}\ket{0}$. This automaton can be drawn with the following state diagram. 
+
+\begin{center}
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,>=stealth']
+\node[state] (x_0) {$\ket{0}$};
+\node[state] (x_1)  [right=of x_0] {$\ket{1}$};
+\node (y_0) [below=of x_0] {1};
+\node (y_1) [below=of x_1] {0};
+\path[->] (x_0) edge[bend left] node (a_0) [above] {\tiny{$\begin{aligned}a&,\half\\b&,1 \end{aligned}$}}  (x_1)
+(x_1) edge[bend left] node [below ] {\tiny{$\begin{aligned}a&,\half\\b&,1 \end{aligned}$}} (x_0)
+(x_0) edge (y_0)
+(x_1) edge (y_1)
+(x_0) edge [loop left] node {$a,\half$} ()
+(x_1) edge [loop right] node {$a,-\half$} ();
+\end{tikzpicture}
+\end{center} 
+
+In \cite{F12}, this quantum automaton $\mathbb{A}=(H,(\delta_a)_{a\in A},\varphi_0,\epsilon)$ gives a coalgebra
+$$
+\begin{aligned}
+\mathcal{DM}(\C^2)&\rightarrow [0,1]\times \mathcal{DM}(\C^2)^{A}\\
+\rho&\mapsto(tr(\rho\epsilon),(\delta_a\rho\delta_a^{\dagger})_{a\in A}).
+\end{aligned}$$ 
+
+Now this coalgebra gives a QLTS $(X,s,c)$ with the initial state $\bra{0}\ket{0}$, where $X=\{x_0,x_1,x_2,y\}$ and 
+$$
+\begin{aligned}
+(s(x_0))_{2,2}&=\lambda \rho\in \mathcal{DM}(\C^{2}). \rho\\
+(c(x_i)(x_j))_{2,2}&=\begin{cases}
+\{\delta_a\} &j=1\\
+\{\delta_b\} &j=2
+\end{cases},\ i=0,1,2\\
+(c(x_i)(y))_{2,2}(\rho)&=\rho \epsilon,\ i=0,1,2\\
+(c(y)(\surd))_{2,2}&=\{I_2\}.
+\end{aligned}
+$$
+
+
+\end{example}
+
+Moreover, if we use a QLTS to model the automaton directly, we can preserve the labels by modifying the pair of functions into follows:
+$$
+\begin{aligned}
+(s(x_0))_{2,2}&=\lambda \rho\in \mathcal{DM}(\C^{2}). \rho\\
+(c(x_i)(a,x_1))_{2,2}&=\{\delta_a\},\ i=0,1,2\\
+(c(x_i)(b,x_2))_{2,2}&=\{\delta_b\},\ i=0,1,2\\
+(c(x_i)(y))_{2,2}(\rho)&=\rho \epsilon,\ i=0,1,2\\
+(c(y)(\surd))_{2,2}&=\{I_2\}.
+\end{aligned}
+$$
+
+\begin{comment}
+\begin{theorem}
+QLISs in \cite{H14} are more expressive than the coalgebraic models in \cite{F12}.
+\end{theorem}
+
+\begin{proof}
+To be proved.
+\end{proof}
+\end{comment}
+
+\section{The monad $\BC$}
+
+Firstly, we define the category $\mathbf{Setp}$ of sets and partial functions as a suitable working environment for modeling quantum system.
+
+\begin{definition}
+The monad $\BC:\mathbf{Setp}\rightarrow \mathbf{Setp}$ is defined as follows:
+$$
+\begin{aligned}
+\BC X&:=\{c:X\rightarrow \C|\sum_{x\in X}c(x)\overline{c(x)}=1\}\\
+\BC(f)(c)(y)&:=\begin{cases}0 &f^{-1}(y)=\emptyset\\
+\sum_{x\in f^{-1}(y)}c(x) &otherwise
+%\BC(f)(c)(y)&:=\begin{cases}0 &f^{-1}(y)=\emptyset\\
+%\frac{1}{\sqrt{\alpha}}\sum_{x\in f^{-1}(y)}c(x) &otherwise
+\end{cases}
+\end{aligned}
+$$
+%where $$\alpha=\sum_{y\in Y}\sum_{x\in f^{-1}(y)}c(x)\overline{\sum_{x\in f^{-1}(y)}c(x)}.$$
+
+\end{definition}
+The unit and the multiplication are:
+$$
+\begin{aligned}
+\eta_{X}(x)&:=\delta_{x}\\
+\mu_{X}(\phi)(x)&:=\sum_{c\in B_{\C}(X)}c(x)\phi(c)
+\end{aligned}
+$$
+
+\begin{definition}
+Category $Kl(\BC)$ is defined as follows:
+\begin{itemize}
+\item $|Kl(\BC)|=|\mathbf{Setp}|$,
+\item for any objects $X,Y\in |Kl(B_{\C})|$,
+$$Hom_{Kl(B_{\C})}(X,Y)=Hom_{\mathbf{Setp}}(X,\BC Y),$$
+\item for any space $X\in |Kl\BC|$, $\eta_X$ is its identity,
+\item and, given two $Kl\BC$ arrows $q_1:X\rightarrow \BC Y$, $q_2:Y\rightarrow \BC Z$ their (sequential) composition, denoted by $q_2\bullet q_1$, is equal to $$\mu_Z\cdot \BC q_2\cdot q_1.$$
+\end{itemize}
+\end{definition}
+
+Given a basis $\ket{x_0},\cdots,\ket{x_{n-1}}$, a state $c_0\ket{x_0}+\cdots+c_{n-1}\ket{x_{n-1}}$ can be modeled as an arrow
+$s:1\rightarrow X$ in $Kl(\BC)$, where $s(\ast)({\ket{x_i}})=c_i, i=0,\cdots,n-1$, and a unitary matrix $U$ can be modeled as an arrow $c:X\rightarrow X$ in $kl(\BC)$, where $s(\ket{x_i})(\ket{x_j})=U(i,j).$ 
+\begin{example}
+
+\end{example}
+
+
+
+\bibliographystyle{abbrv}
+\bibliography{the}
+\end{document}
