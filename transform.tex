@@ -6,6 +6,7 @@
 \usepackage{amssymb,amsmath}
 \usepackage{pgf,tikz}
 \usepackage{comment}
+\usepackage{color}
 \usetikzlibrary{automata, positioning}
 \usetikzlibrary{shapes,arrows}
 
@@ -158,12 +159,48 @@ $s:1\rightarrow X$ in $Kl(\BC)$, where $s(\ast)({\ket{x_i}})=c_i, i=0,\cdots,n-1
 \]
 \end{example}
 
-Given an initial state $\ket{\varphi}=c_0\ket{0}+c_1\ket{1}$, there is a corresponding arrow $s:1\rightarrow X$, where $X=\{\ket{0},\ket{1}\}$ and $s(\ast)(\ket{i}=c_i), i=0,1$. Firstly, we should compose the initial state with $\ket{00}$ by the arrow $c_1:X\rightarrow Y$, where $Y=\{\ket{000},\ket{001},\ket{010},\ket{011},\ket{100},\ket{101},\ket{110},\ket{111}\}$ and 
+Given an initial state $\ket{\varphi}=c_0\ket{0}+c_1\ket{1}$, there is a corresponding arrow $s:1\rightarrow X$, where $X=\{\ket{0},\ket{1}\}$ and $s(\ast)(\ket{i})=c_i, i=0,1$. Firstly, we should compose the initial state with $\ket{00}$ by the arrow $c_1:X\rightarrow Y$, where $Y=\{\ket{000},\ket{001},\ket{010},\ket{011},\ket{100},\ket{101},\ket{110},\ket{111}\}$ and 
 $$\begin{aligned}
 c(\ket{0})(y)&=\begin{cases} 1 &y=\ket{000}\\ 0 &otherwise\end{cases}\\
-c(\ket{1})(y)&=\begin{cases} 1 &y=\ket{100}\\ 0 &otherwise\end{cases}
+c(\ket{1})(y)&=\begin{cases} 1 &y=\ket{100}\\ 0 &otherwise\end{cases}.
 \end{aligned}
 $$. 
+The composition of $c_1$ and $s$ is an arrow $c_1\bullet s:1\rightarrow Y$, where 
+$$
+c_1\bullet s(\ast)(y)=\begin{cases} c_0 & y=\ket{000} \\ c_1 & y=\ket{100} otherwise \end{cases}.
+$$
+The state transformation corresponds to the arrow $c_2:Y\rightarrow Y$ induced by the unitary operator $(H\otimes I_4)(^cNOT\otimes I_2)(I_2\otimes \ _cNOT)(I_4\otimes H)$, where 
+$$
+^cNOT=\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0
+\end{bmatrix}  
+\ _cNOT=\begin{bmatrix}
+0 & 1 & 0 & 0 \\
+1 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0
+\end{bmatrix}.  
+$$
+After measuring the top two qubits, there may be four results, corresponding four arrows $m_1,m_2,m_3,m_4:Y\rightarrow X$, where 
+$$
+\begin{aligned}
+m_1(x)(y)&=\begin{cases}1 &x=\ket{000} y=\ket{0}\\ 1 &x=\ket{001} y=\ket{1}\\ 0 & otherwise\end{cases}\\
+m_2(x)(y)&=\begin{cases}1 &x=\ket{010} y=\ket{0}\\ 1 &x=\ket{011} y=\ket{1}\\ 0 & otherwise\end{cases}\\
+m_3(x)(y)&=\begin{cases}1 &x=\ket{100} y=\ket{0}\\ 1 &x=\ket{101} y=\ket{1}\\ 0 & otherwise\end{cases}\\
+m_4(x)(y)&=\begin{cases}1 &x=\ket{110} y=\ket{0}\\ 1 &x=\ket{111} y=\ket{1}\\ 0 & otherwise\end{cases}
+\end{aligned}
+$$
+For different results of the measurement, different operators will be applied to the bottom qubit. Define two arrows $p_x,p_z: X\rightarrow X$ induced by pauli-X matrix and pauli-Z matrix, respectively. There are four corresponding compositions of arrows:
+\begin{itemize}
+\item if the measurement is $\ket{00}$, the composition is $c_2\bullet c_1\bullet s$;
+\item if the measurement is $\ket{01}$, the composition is $p_x\bullet c_2\bullet c_1\bullet s$;
+\item if the measurement is $\ket{10}$, the composition is $p_z\bullet c_2\bullet c_1\bullet s$;
+\item if the measurement is $\ket{11}$, the composition is $p_z\bullet p_x\bullet c_2\bullet c_1\bullet s$.
+\end{itemize}
+These composition will get the same arrow $f:1\rightarrow X$, where $f(\ast)(\ket{i})=\frac{1}{2}c_i, i=0,1.$ In quantum mechanics, $s$ and $f$ corresponding to the same state, since the probability of it being found in state $\ket{0}$ or $\ket{1}$ is the same. 
 
 
 \bibliographystyle{abbrv}
