@@ -109,10 +109,10 @@ To be proved.
 
 \section{The monad $\BC$}
 
-Firstly, we define the category $\mathbf{Setp}$ of sets and partial functions as a suitable working environment for modeling quantum system.
+%Firstly, we define the category $\mathbf{Sets}$ of sets and partial functions as a suitable working environment for modeling quantum system.
 
 \begin{definition}
-The monad $\BC:\mathbf{Setp}\rightarrow \mathbf{Setp}$ is defined as follows:
+The monad $\BC:\mathbf{Sets}\rightarrow \mathbf{Sets}$ is defined as follows:
 $$
 \begin{aligned}
 \BC X&:=\{c:X\rightarrow \C|\sum_{x\in X}c(x)\overline{c(x)}=1\}\\
@@ -137,21 +137,33 @@ $$
 \begin{definition}
 Category $Kl(\BC)$ is defined as follows:
 \begin{itemize}
-\item $|Kl(\BC)|=|\mathbf{Setp}|$,
+\item $|Kl(\BC)|=|\mathbf{Sets}|$,
 \item for any objects $X,Y\in |Kl(B_{\C})|$,
-$$Hom_{Kl(B_{\C})}(X,Y)=Hom_{\mathbf{Setp}}(X,\BC Y),$$
+$$Hom_{Kl(B_{\C})}(X,Y)=Hom_{\mathbf{Sets}}(X,\BC Y),$$
 \item for any space $X\in |Kl\BC|$, $\eta_X$ is its identity,
 \item and, given two $Kl\BC$ arrows $q_1:X\rightarrow \BC Y$, $q_2:Y\rightarrow \BC Z$ their (sequential) composition, denoted by $q_2\bullet q_1$, is equal to $$\mu_Z\cdot \BC q_2\cdot q_1.$$
 \end{itemize}
 \end{definition}
 
 Given a basis $\ket{x_0},\cdots,\ket{x_{n-1}}$, a state $c_0\ket{x_0}+\cdots+c_{n-1}\ket{x_{n-1}}$ can be modeled as an arrow
-$s:1\rightarrow X$ in $Kl(\BC)$, where $s(\ast)({\ket{x_i}})=c_i, i=0,\cdots,n-1$, and a unitary matrix $U$ can be modeled as an arrow $c:X\rightarrow X$ in $kl(\BC)$, where $s(\ket{x_i})(\ket{x_j})=U(i,j).$ 
+$s:1\rightarrow X$ in $Kl(\BC)$, where $s(\ast)({\ket{x_i}})=c_i, i=0,\cdots,n-1$, and a unitary matrix $U$ can be modeled as an arrow $c:X\rightarrow X$ in $kl(\BC)$, where $s(\ket{x_i})(\ket{x_j})=U(i,j).$ Note that it is not required that $\sum_{i=0}^{n-1}c_i\overline{c_i}=1$ here. 
 
-\begin{example}
-
+\begin{example}(quantum teleportation protocol)
+\[
+\Qcircuit @C=.7em @R=.4em @! {
+\lstick{\ket{\psi}} & \qw & \qw & \ctrl{1} & \gate{H} & \meter & \control \cw\\
+\lstick{\ket{0}} & \qw & \targ & \targ & \qw & \meter & \cwx\\
+\lstick{\ket{0}} & \gate{H} & \ctrl{-1} & \qw & \qw & \gate{X} \cwx & \gate{Z} \cwx & \rstick{\ket{\psi}} \qw
+}
+\]
 \end{example}
 
+Given an initial state $\ket{\varphi}=c_0\ket{0}+c_1\ket{1}$, there is a corresponding arrow $s:1\rightarrow X$, where $X=\{\ket{0},\ket{1}\}$ and $s(\ast)(\ket{i}=c_i), i=0,1$. Firstly, we should compose the initial state with $\ket{00}$ by the arrow $c_1:X\rightarrow Y$, where $Y=\{\ket{000},\ket{001},\ket{010},\ket{011},\ket{100},\ket{101},\ket{110},\ket{111}\}$ and 
+$$\begin{aligned}
+c(\ket{0})(y)&=\begin{cases} 1 &y=\ket{000}\\ 0 &otherwise\end{cases}\\
+c(\ket{1})(y)&=\begin{cases} 1 &y=\ket{100}\\ 0 &otherwise\end{cases}
+\end{aligned}
+$$. 
 
 
 \bibliographystyle{abbrv}
