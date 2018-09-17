@@ -16,16 +16,54 @@
 \begin{document}
 
 \section{Summary}
-Automata theory is widely used to tackle computational problems. Some quantum versions automata are proposed to study quantum computation. Real-time quantum automata (QA) are introduced in \cite{CJ00} by Moore and Crutchfield. Besides, Quantum finite-state and push-down automata (QFA and QPDA) are defined as special cases of real-time quantum automata. It is also showed that the corresponding languages recognized by quantum automata have pleasing properties in analogy to the classical counterpart. The model by Moore and Crutchifield is frequently referred as to ``'Measure-Once' (MO). Another early model is introduced in \cite{AJ97}, which is referred as to ``Measure-Many'' model (MM).
+Automata theory is widely used to tackle computational problems. Some
+quantum versions automata are proposed to study quantum
+computation. Real-time quantum automata (QA) are introduced in
+\cite{CJ00} by Moore and Crutchfield. Besides, Quantum finite-state
+and push-down automata (QFA and QPDA) are defined as special cases of
+real-time quantum automata. It is also showed that the corresponding
+languages recognized by quantum automata have pleasing properties in
+analogy to the classical counterpart. The model by Moore and
+Crutchifield is frequently referred as to ``'Measure-Once'
+(MO). Another early model is introduced in \cite{AJ97}, which is
+referred as to ``Measure-Many'' model (MM).
 
-Early quantum automata models have some limitations, that is to say they did not embody the full power provided by quantum physics. Their states are usually vector states in Hilbert spaces, which can only represent the pure states. Density matrices of self-adjoint positive mappings of Hilbert spaces with unit trace can represent the mixed states. The introduction to the Hilbert space formalism of finite-level quantum systems can be found in \cite{M11}. Moreover, a general QFA model, which is able to simulate all known QFA, is proposed in \cite{AA14}.
+Early quantum automata models have some limitations, that is to say
+they did not embody the full power provided by quantum physics. Their
+states are usually vector states in Hilbert spaces, which can only
+represent the pure states. Density matrices of self-adjoint positive
+mappings of Hilbert spaces with unit trace can represent the mixed
+states. The introduction to the Hilbert space formalism of
+finite-level quantum systems can be found in \cite{M11}. Moreover, a
+general QFA model, which is able to simulate all known QFA, is
+proposed in \cite{AA14}.
 
-Coalgebras are widely used to model state-based systems, covering various flavors of computation, like deterministic, non-deterministic, probabilistic etc. There are several coalgebraic methods for quantum computing. A coalgebraic description of quantum walks is proposed in \cite{B11}, based on the weight functor induced by the complex numbers. A coalgebraic model of state-based systems that occur in quantum computation is proposed in \cite{F12}, based on the category \textbf{Conv} which incorporates both quantum probability via density matrices and the classical probability that is need for the output. Although the coalgebraic model can model computations for both systems in pure states and systems in mixed states, it has some limitations to model complex quantum systems, like quantum circuits with measurement and discard. Quantum labeled transition system (QLTS) based on quantum branching monad in \cite{H14} can cover these limitations. 
+Coalgebras are widely used to model state-based systems, covering
+various flavors of computation, like deterministic, non-deterministic,
+probabilistic etc. There are several coalgebraic methods for quantum
+computing. A coalgebraic description of quantum walks is proposed in
+\cite{B11}, based on the weight functor induced by the complex
+numbers. A coalgebraic model of state-based systems that occur in
+quantum computation is proposed in \cite{F12}, based on the category
+\textbf{Conv} which incorporates both quantum probability via density
+matrices and the classical probability that is need for the
+output. Although the coalgebraic model can model computations for both
+systems in pure states and systems in mixed states, it has some
+limitations to model complex quantum systems, like quantum circuits
+with measurement and discard. Quantum labeled transition system (QLTS)
+based on quantum branching monad in \cite{H14} can cover these
+limitations.
 
 \section{Transformation}
-Here I try to use the QLTS $(X,s,c)$ in \cite{H14} to model the coalgebraic model $$\mathcal{DM}(H)\rightarrow [0,1]^{E}\times \mathcal{DM}(H)^{S}$$ in \cite{F12}.
+Here I try to use the QLTS $(X,s,c)$ in \cite{H14} to model the
+coalgebraic model
+$$\mathcal{DM}(H)\rightarrow [0,1]^{E}\times \mathcal{DM}(H)^{S}$$ in
+\cite{F12}.
 
-Given $dim(H)=n$, $E=\{\epsilon_{1},\dots,\epsilon_{e}\}$ and $S=\{U_1,\dots,U_s\}$, I define $X=\{x_0,x_1,\dots,x_s,y_1,\dots,y_e\}$. The pair of functions is defines as follows:
+Given $dim(H)=n$, $E=\{\epsilon_{1},\dots,\epsilon_{e}\}$ and
+$S=\{U_1,\dots,U_s\}$, I define
+$X=\{x_0,x_1,\dots,x_s,y_1,\dots,y_e\}$. The pair of functions is
+defines as follows:
 $$
 \begin{aligned}
 (s(x_0))_{n,n}&=\lambda \rho\in \mathcal{DM}(H_n). \rho\\
@@ -36,7 +74,9 @@ $$
 $$
 
 \begin{example}[\cite{F12}]
-There is a quantum automaton over the alphabet $A=\{a,b\}$. Take the two-dimensional state space $\C^{2}$ with the standard basis written as $\ket{0}$, $\ket{1}$.The transition matrices are
+  There is a quantum automaton over the alphabet $A=\{a,b\}$. Take the
+  two-dimensional state space $\C^{2}$ with the standard basis written
+  as $\ket{0}$, $\ket{1}$.The transition matrices are
 $$
 \delta_a=\half\begin{bmatrix}
 1&1 \\
@@ -47,7 +87,9 @@ $$
 1&0
 \end{bmatrix}.
 $$
-The initial state is $\varphi_0=\ket{0}$ and the effect is $\epsilon=\bra{0}\ket{0}$. This automaton can be drawn with the following state diagram. 
+The initial state is $\varphi_0=\ket{0}$ and the effect is
+$\epsilon=\bra{0}\ket{0}$. This automaton can be drawn with the
+following state diagram.
 
 \begin{center}
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,>=stealth']
