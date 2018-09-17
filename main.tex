@@ -1,0 +1,148 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
+\usepackage{lipsum} %This package just generates Lorem Ipsum filler text. 
+\usepackage{fullpage} % changes the margin
+\usepackage{libertine}
+\usepackage{color}
+\newcommand{\nevComment}[1]{\textcolor{red}{RN: #1}}
+\linespread{1.1}
+
+\begin{document}
+\title{Coalgebras meet Quantum Computing}
+\author{Luis S. Barbosa \and Liu Ai \and Renato Neves}
+\maketitle
+
+\section{Introduction}
+
+\subsection{The importance of quantum computing}
+
+\nevComment{\underline{Goal of this subsection}: To tell the reader
+why it is important to study quantum computing. Also, to give a
+first introduction to quantum systems.  \underline{Useful references}:
+\cite{nielsen2002quantum,NM08,ying16}. }
+
+\subsection{What coalgebras bring into the game}
+
+\nevComment{\underline{Goal of this subsection}: To tell the reader
+in which ways coalgebras can help better understand quantum systems and develop
+tools for their analysis. \underline{Useful references}:
+\cite{rutten2000,Jacobs16}. }
+
+\subsection{Objectives}
+
+The goals of the present work are,
+\begin{enumerate}
+\item to provide a unifying view of the
+  current models for quantum transition systems;
+\item to formally relate them in terms of expressivity.
+\end{enumerate}
+\nevComment{We will also need to tell why these objectives are relevant.}
+
+\subsection{Document structure and notation}
+
+\nevComment{\underline{Goal of this subsection}: To guide the reader
+along the document, so that he can get a broad picture of our
+exposition at an early stage. Setting (non-standard) notation at
+a common point is also useful to the reader.}
+
+\section{A Primer on Quantum Computing}
+
+\subsection{What makes it different from classical paradigms}
+
+\nevComment{\underline{Goal of this subsection}: To explain to the
+reader why quantum computing is a challenging thing, and why the
+problems that we are addressing are non-trivial. References from
+subsection 1.1 can also be used here. }
+
+\subsection{A general view of its current formalisms}
+
+\nevComment{\underline{Goal of this subsection}: To give the reader a
+  broad view of what is currently being done in regard to semantics of
+  quantum systems. This includes not only transition systems, but also
+  programming languages \cite{selinger04,hasuo17,ying16}, circuit
+  formalisms \cite{nielsen2002quantum}, and process algebras
+  \cite{jorrand04,ying09}, etc \dots. Later on we will focus just on transition
+  systems}
+
+\subsection{Examples of quantum systems}
+
+\nevComment{\underline{Goal of this subsection}: To introduce the reader
+to a stock of examples of quantum systems. The latter will be used
+for illustrating different models of quantum transition systems.}
+
+\section{A Primer on Coalgebra}
+
+\subsection{Basic notions}
+
+\nevComment{\underline{Goal of this subsection}: To introduce the reader
+to coalgebra. References from subsection 1.2 can be used here.}
+
+
+\subsection{Coalgebraic analysis of probabilistic systems: an
+  illustration of the coalgebraic approach to the study of state-based
+  transition systems}
+
+\nevComment{\underline{Goal of this subsection}: To convince the
+  reader that Coalgebra is a powerful abstraction tool for studying
+  and developing different types of state-based transition systems in
+  a uniform manner.  This justifies why we took the coalgebraic
+  approach for accomplishing goals presented above. Our illustration
+  concerns probabilistic systems because they are close to quantum
+  ones. The main reference for this subsection is \cite{sokolova}.}
+
+
+\section{Current Formalisms for Quantum transition systems}
+
+\subsection{Quantum automata}
+
+\nevComment{\underline{Goal of this subsection}: To introduce the
+  reader to quantum automata and related notions. The main reference for this is the
+  survey \cite{hirvensalo11}.}
+
+\subsection{Quantum coalgebras in the category of sets}
+
+\nevComment{\underline{Goal of this subsection}: To introduce the
+reader to Ichiro's and Ogawa's formalism (which involves the quantum
+branching monad) \cite{hasuo17,ogawa14}. The notions of behavioural
+equivalence proposed in these two references should also be mentioned; as they are one
+source of motivation to our goals.}
+
+\subsection{Quantum coalgebras in the category of convex sets}
+
+\nevComment{\underline{Goal of this subsection}: To introduce the
+  reader to Roumen's formalism \cite{F14}. The notions of minimisation
+  that were proposed and the duality between Schrodinger and Heisenberg should
+  be mentioned; they are sources of motivation to our goals.}
+
+
+\section{Relation between formalisms of quantum transition systems}
+
+\subsection{A uniform view of quantum transition systems}
+
+\nevComment{\underline{Goal of this subsection}: To provide the reader with a uniform
+view of quantum automata \cite{hirvensalo11} using a coalgebraic approach. Extend this
+view to Ichiro's and Roumen's coalgebras.}
+
+\subsection{A hierarchy of formalisms for quantum transition systems}
+
+\nevComment{\underline{Goal of this subsection}: Establish a hierarchy
+  of formalisms for quantum transition systems. In the coalgebraic
+  approach this ammounts to having monomorphic natural transformations
+  between the functors of interest (see \cite[Section 4.4]{sokolova}).}
+
+\section{Summary}
+
+\nevComment{\underline{Goal of this subsection}: To give a broad
+  picture of the results achieved in the previous section. In
+  particular, a diagram depicting the hierarchy established, and the
+  (dis)advantages of each formalism.}
+
+
+\section{\dots}
+
+
+%%Bibliography
+\bibliographystyle{alpha}
+\bibliography{the}
+
+\end{document}
